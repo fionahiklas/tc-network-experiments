@@ -5,9 +5,35 @@
 Containers attached on user-defined bridge networks can't access the internet
 
 
+## Possible Resolution
+
+* Seems that the test I did on an x86 machine also uncovered differences in kernel
+* I did a full update before installing Docker and this must have triggered the install of the 6.2.x kernel rather than 5.15
+* Found information [here](https://www.omgubuntu.co.uk/2023/08/ubuntu-22-04-linux-kernel-6-2)
+* Having upgraded twoflower (Linux aarch64 VM on MacOS) docker test with bridge seems to work and ping gets through
+
+
+
 ## Investigation
 
-### Single Ping 
+### Linux VM Twoflower
+
+This spec
+
+```
+lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.2 LTS
+Release:	22.04
+Codename:	jammy
+
+uname -a
+Linux twoflower 5.15.0-78-generic #85-Ubuntu SMP Fri Jul 7 15:29:30 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
+```
+
+
+#### Single Ping 
 
 Running docker with a new network
 
@@ -79,6 +105,56 @@ PACKET: 2 5d0e7204 IN=ens160 OUT=docker0 MACSRC=0:50:56:e3:7a:86 MACDST=0:c:29:c
  TRACE: 2 5d0e7204 filter:FORWARD:rule:0x4b:JUMP:DOCKER-ISOLATION-STAGE-1  -4 -t filter -A FORWARD -j DOCKER-ISOLATION-STAGE-1
  TRACE: 2 5d0e7204 filter:DOCKER-ISOLATION-STAGE-1:return:
  TRACE: 2 5d0e7204 filter:FORWARD:rule:0x4a:ACCEPT  -4 -t filter -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+```
+
+
+### Linux Desktop 
+
+This spec
+
+```
+lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.3 LTS
+Release:	22.04
+Codename:	jammy
+
+uname -a
+Linux manu 6.2.0-26-generic #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+Docker
+
+```
+docker version
+Client: Docker Engine - Community
+ Version:           24.0.5
+ API version:       1.43
+ Go version:        go1.20.6
+ Git commit:        ced0996
+ Built:             Fri Jul 21 20:35:18 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          24.0.5
+  API version:      1.43 (minimum version 1.12)
+  Go version:       go1.20.6
+  Git commit:       a61e2b4
+  Built:            Fri Jul 21 20:35:18 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.22
+  GitCommit:        8165feabfdfe38c65b599c4993d227328c231fca
+ runc:
+  Version:          1.1.8
+  GitCommit:        v1.1.8-0-g82f18fe
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ```
 
 ## References
