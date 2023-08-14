@@ -6,7 +6,39 @@ Installing Docker on Linux (Ubuntu) and any setup/hacking of config to
 get it working with the test setup.
 
 
-## Steps
+## Docker Setup
+
+
+### Ubuntu Prerequites
+
+Whether this is running on bare hardware or using some kind of virtual machine you need 
+to install a few packages and, most importantly upgrade to Linux kernel 6.2 as this is 
+now available for Ubuntu 22.04LTS
+
+#### Linux Kernel Upgrade
+
+Run the following commands 
+
+```
+sudo apt update
+sudo apt full-upgrade
+sudo reboot
+sudo apt install linux-generic-hwe-22.04
+sudo reboot
+```
+
+#### Extra Packages
+
+Run the following commands
+
+```
+sudo apt install conntrack
+sudo apt install tc
+```
+
+
+
+### Installation
 
 * Following these [instructions](https://docs.docker.com/engine/install/ubuntu/)
 * Running the following as root to get the install setup
@@ -35,5 +67,5 @@ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 usermod -aG docker fiona
 ```
 
-
+* Log out/back in again
 

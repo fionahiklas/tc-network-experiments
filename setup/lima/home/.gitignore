@@ -1,0 +1,6 @@
+# Don't commit anything under here, only the .gitignore file
+*
+!.gitignore
+!.gitkeep
+!README.md
+
