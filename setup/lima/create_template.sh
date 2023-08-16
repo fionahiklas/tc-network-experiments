@@ -5,4 +5,4 @@
 TEMPLATE=ubuntu-2204-lts.template.yaml
 OUTPUT=ubuntu-2204-lts.yaml
 
-cat "$TEMPLATE" | sed -e "s/REPOLIMABASE/$PWD/g" > "$OUTPUT"
+cat "$TEMPLATE" | sed -e "s%REPOLIMABASE%$PWD%g" > "$OUTPUT"
