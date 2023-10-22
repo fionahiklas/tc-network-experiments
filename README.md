@@ -181,3 +181,6 @@ This command was run after creating the new docker network in the section above.
 * [Ubuntu Linux 6.2 Kernel install](https://www.omgubuntu.co.uk/2023/08/ubuntu-22-04-linux-kernel-6-2)
 * [IP Masquerading HOWTO](https://tldp.org/HOWTO/html_single/IP-Masquerade-HOWTO/)
 * [Changing Ubuntu Timezone with timedatectl](https://www.hostinger.co.uk/tutorials/how-to-change-timezone-in-ubuntu/#:~:text=To%20do%20so%2C%20open%20Terminal,is%20using%20the%20timedatectl%20command.)
+* [Cloud Init](https://docs.aws.amazon.com/linux/al2023/ug/cloud-init.html)
+
+
